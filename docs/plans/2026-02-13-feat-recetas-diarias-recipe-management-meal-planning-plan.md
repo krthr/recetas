@@ -342,26 +342,26 @@ Final touches for a delightful experience.
 
 ### Functional Requirements
 
-- [ ] User can add a recipe with name, time, ingredients, difficulty, meal type, and optionally a photo and notes
-- [ ] User can edit and delete existing recipes
-- [ ] User can browse recipes in a responsive grid with search and filtering by meal type and difficulty
-- [ ] User can view a single recipe's full details
-- [ ] User can generate a weekly meal plan (Mon-Sun, lunch + dinner) using Gemini AI
-- [ ] Plan generation is blocked with a message if fewer than 5 recipes exist
-- [ ] User can swap individual meal slots in the plan (local random replacement)
-- [ ] User can regenerate the entire plan (with confirmation)
-- [ ] User can use the random picker with optional meal type and difficulty filters
-- [ ] Deleting a recipe that is in the active plan nulls out the plan slot
-- [ ] All UI text is in Spanish
-- [ ] Photo uploads are limited to 5MB, JPEG/PNG/WebP only
+- [x] User can add a recipe with name, time, ingredients, difficulty, meal type, and optionally a photo and notes
+- [x] User can edit and delete existing recipes
+- [x] User can browse recipes in a responsive grid with search and filtering by meal type and difficulty
+- [x] User can view a single recipe's full details
+- [x] User can generate a weekly meal plan (Mon-Sun, lunch + dinner) using Gemini AI
+- [x] Plan generation is blocked with a message if fewer than 5 recipes exist
+- [x] User can swap individual meal slots in the plan (local random replacement)
+- [x] User can regenerate the entire plan (with confirmation)
+- [x] User can use the random picker with optional meal type and difficulty filters
+- [x] Deleting a recipe that is in the active plan nulls out the plan slot
+- [x] All UI text is in Spanish
+- [x] Photo uploads are limited to 5MB, JPEG/PNG/WebP only
 
 ### Non-Functional Requirements
 
-- [ ] Mobile-first responsive design (works well at 375px width)
-- [ ] Bottom tab navigation on mobile, top nav on desktop
-- [ ] Gemini API key is server-only (never exposed to client)
-- [ ] Photo files are cleaned up when recipes are deleted or photos are replaced
-- [ ] SQLite database uses WAL mode and foreign keys enabled
+- [x] Mobile-first responsive design (works well at 375px width)
+- [x] Bottom tab navigation on mobile, top nav on desktop
+- [x] Gemini API key is server-only (never exposed to client)
+- [x] Photo files are cleaned up when recipes are deleted or photos are replaced
+- [x] SQLite database uses WAL mode and foreign keys enabled
 
 ## Dependencies
 
