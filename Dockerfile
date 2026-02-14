@@ -23,6 +23,9 @@ COPY --from=build /app/node_modules/.package-lock.json .package-lock.json
 # but we need the shared lib at runtime
 COPY --from=build /app/node_modules/better-sqlite3 node_modules/better-sqlite3
 
+# Migration SQL files (applied on startup by server/plugins/migrate.ts)
+COPY --from=build /app/drizzle drizzle
+
 # Persistent data directory for SQLite + uploads
 VOLUME /app/.data
 
