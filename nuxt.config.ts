@@ -7,13 +7,15 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     geminiApiKey: "", // env: NUXT_GEMINI_API_KEY
+    dbPath: ".data/db.sqlite3", // env: NUXT_DB_PATH
+    uploadsPath: ".data/uploads", // env: NUXT_UPLOADS_PATH
   },
 
   nitro: {
     storage: {
       uploads: {
         driver: "fs",
-        base: "./.data/uploads",
+        base: process.env.NUXT_UPLOADS_PATH || "./.data/uploads",
       },
     },
   },
