@@ -43,6 +43,21 @@ const state = reactive<Schema>({
   notes: props.initialData?.notes ?? "",
 });
 
+const { data: availableIngredients, status: ingredientsStatus } =
+  useFetch<string[]>("/api/ingredients", { default: () => [] });
+const ingredientsLoading = computed(
+  () => ingredientsStatus.value === "pending"
+);
+
+function onCreateIngredient(item: string, index: number) {
+  const normalized = item.trim().toLowerCase();
+  if (normalized && !availableIngredients.value.includes(normalized)) {
+    availableIngredients.value.push(normalized);
+    availableIngredients.value.sort((a, b) => a.localeCompare(b, "es"));
+  }
+  state.ingredients[index] = normalized;
+}
+
 const photoFile = ref<File | null>(null);
 const existingPhoto = ref(props.initialData?.photo ?? null);
 const photoPreview = computed(() => {
@@ -96,7 +111,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
     const data = {
       ...event.data,
-      ingredients: event.data.ingredients.filter((i) => i.trim() !== ""),
+      ingredients: event.data.ingredients
+        .map((i) => i.trim().toLowerCase())
+        .filter((i) => i !== ""),
       photo: photoFilename,
       notes: event.data.notes || null,
     };
@@ -158,10 +175,14 @@ const mealTypeOptions = [
           :key="index"
           class="flex gap-2"
         >
-          <UInput
+          <UInputMenu
             v-model="state.ingredients[index]"
+            :items="availableIngredients"
+            :loading="ingredientsLoading"
+            create-item
             :placeholder="`Ingrediente ${index + 1}`"
             class="flex-1"
+            @create="onCreateIngredient($event, index)"
           />
           <UButton
             v-if="state.ingredients.length > 1"
