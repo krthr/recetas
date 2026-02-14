@@ -8,8 +8,7 @@ export default defineEventHandler(async (event) => {
   if (allRecipes.length < 5) {
     throw createError({
       statusCode: 400,
-      statusMessage:
-        "Agrega al menos 5 recetas para generar un plan semanal",
+      statusMessage: "Agrega al menos 5 recetas para generar un plan semanal",
     });
   }
 
@@ -49,7 +48,7 @@ Responde SOLO con un JSON array con exactamente 14 objetos, cada uno con:
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3-flash-preview",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -74,12 +73,12 @@ Responde SOLO con un JSON array con exactamente 14 objetos, cada uno con:
       validIds.has(slot.recipeId) &&
       slot.dayOfWeek >= 0 &&
       slot.dayOfWeek <= 6 &&
-      (slot.mealType === "lunch" || slot.mealType === "dinner")
+      (slot.mealType === "lunch" || slot.mealType === "dinner"),
   );
 
   // Ensure we have all 14 slots (fill any missing with random picks)
   const existingSlots = new Set(
-    planData.map((s) => `${s.dayOfWeek}-${s.mealType}`)
+    planData.map((s) => `${s.dayOfWeek}-${s.mealType}`),
   );
   for (let day = 0; day < 7; day++) {
     for (const meal of ["lunch", "dinner"]) {
@@ -112,7 +111,7 @@ Responde SOLO con un JSON array con exactamente 14 objetos, cada uno con:
       dayOfWeek: slot.dayOfWeek,
       mealType: slot.mealType,
       recipeId: slot.recipeId,
-    }))
+    })),
   );
 
   // Return plan with recipe details
